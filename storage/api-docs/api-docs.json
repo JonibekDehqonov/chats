@@ -29,14 +29,6 @@
                         }
                     },
                     {
-                        "name": "mobile_number",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
                         "name": "password",
                         "in": "query",
                         "required": true,
@@ -150,9 +142,6 @@
                                 }
                             }
                         }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
                     }
                 },
                 "security": [
@@ -219,10 +208,10 @@
                                         "type": "string",
                                         "example": "This is the content of my first post."
                                     },
-                                    "status": {
-                                        "description": "Status",
-                                        "type": "string",
-                                        "example": "новая, в процессе, заваршена"
+                                    "status_id": {
+                                        "description": "Status_id",
+                                        "type": "integer",
+                                        "example": "1,2,3"
                                     }
                                 },
                                 "type": "object"
@@ -311,10 +300,10 @@
                 ],
                 "responses": {
                     "404": {
-                        "description": "Пользователь не найден"
+                        "description": " не найден"
                     },
                     "401": {
-                        "description": "Неавторизованный доступ"
+                        "description": "доступ"
                     }
                 },
                 "security": [
@@ -355,10 +344,10 @@
                                         "type": "string",
                                         "example": "This is the content of my first post."
                                     },
-                                    "status": {
-                                        "description": "Status",
-                                        "type": "string",
-                                        "example": "новая, в процессе, заваршена"
+                                    "status_id": {
+                                        "description": "Status_id",
+                                        "type": "integer",
+                                        "example": "1,2,3"
                                     }
                                 },
                                 "type": "object"

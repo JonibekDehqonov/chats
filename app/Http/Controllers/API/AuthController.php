@@ -36,14 +36,6 @@ class AuthController extends Controller
      *      )
      *   ),
      *   @OA\Parameter(
-     *       name="mobile_number",
-     *      in="query",
-     *      required=true,
-     *      @OA\Schema(
-     *           type="integer"
-     *      )
-     *   ),
-     *   @OA\Parameter(
      *      name="password",
      *      in="query",
      *      required=true,
@@ -90,8 +82,7 @@ class AuthController extends Controller
          $validator = Validator::make($request->all(), [
              'name' => 'required',
              'email' => 'required|email|unique:users',
-             'password' => 'required',
-             'mobile_number' => 'required'
+             'password' => 'required|min:8|confirmed',
          ]);
  
          if ($validator->fails()) {
@@ -164,7 +155,7 @@ public function login(Request $request)
         'password' => 'required',
     ]);
 
-    // Поиск пользователя по email
+    
     $profile = User::where('email', $request->email)->first();
 
     if (!$profile) {
@@ -205,12 +196,6 @@ public function login(Request $request)
         *             @OA\Property(property="message", type="string", example="Successfully logged out")
         *         )
         *     ),
-        *     @OA\Response(response=401, description="Unauthorized")
-        * @OA\Response(
-        *      response=404,
-        *      description="not found"
-        *  
-        * ),
         * )
         */
     public function logout(Request $request)

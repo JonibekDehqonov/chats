@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTasktRequest;
 use App\Models\Task;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -79,10 +80,10 @@ class TaskController extends Controller
  *                 example="This is the content of my first post."
  *             ),
  *               @OA\Property(
- *                 property="status",
- *                 type="string",
- *                 description="Status",
- *                 example="новая, в процессе, заваршена"
+ *                 property="status_id",
+ *                 type="integer",
+ *                 description="Status_id",
+ *                 example="1,2,3"
  *             ),
  *              
  *  
@@ -134,18 +135,13 @@ class TaskController extends Controller
  * )
 **/
    
-    public function store(Request $request)
+    public function store(StoreTasktRequest $request)
     {
-        $validated=$request->validate([
-            'title'=>'required|max:255',
-            'description'=>'required',
-            'status'=>'required',
-            
-        ]);
-
+        $validated = $request->validated();
+ 
         $task= Task::create($validated);
-       return $task;
-
+        return $task;
+    
 
         
     }
@@ -171,11 +167,11 @@ class TaskController extends Controller
      *    
      *     @OA\Response(
      *         response=404,
-     *         description="Пользователь не найден"
+     *         description=" не найден"
      *     ),
      *     @OA\Response(
      *         response=401,
-     *         description="Неавторизованный доступ"
+     *         description="доступ"
      *     )
      * )
      */
@@ -216,10 +212,10 @@ class TaskController extends Controller
  *                 example="This is the content of my first post."
  *             ),
  *               @OA\Property(
- *                 property="status",
- *                 type="string",
- *                 description="Status",
- *                 example="новая, в процессе, заваршена"
+ *                 property="status_id",
+ *                 type="integer",
+ *                 description="Status_id",
+ *                 example="1,2,3"
  *             ),
  *              
  *  
@@ -236,24 +232,14 @@ class TaskController extends Controller
  * )
  */
 
- public function update(Request $request, $id)
+ public function update(StoreTasktRequest $request, $id)
  {
-    
+    $validated = $request->validated();
     $task = Task::find($id);
     if (!$task) {
         return response()->json(['error' => 'Task not found'], 404);
     }
-
-    $validated = $request->validate([
-        'title' => 'required|max:255',
-        'description' => 'required',
-        'status' => 'required|in: "новая", "в процессе", "заваршена"',
-    ]);
-
-   
     $task->update($validated);
-
- 
     return response()->json(['success' => $task], 200);
  }
 
@@ -283,6 +269,9 @@ class TaskController extends Controller
     public function destroy(string $id)
     {
         $task = Task::find($id);
+        if (!$task) {
+        return response()->json(['error' => 'Task not found'], 404);
+        }
         $task->delete(); 
         return 'success';
     }

@@ -1,6 +1,7 @@
 1. Скачать проект
 Клонируйте проект на свой компьютер:
-git clone https://github.com/username/project-name.git
+git clone https://github.com/JonibekDehqonov/proIO.git
+
 
 
 После клонирования перейдите в папку проекта:

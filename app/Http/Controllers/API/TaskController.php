@@ -247,7 +247,7 @@ class TaskController extends Controller
     $validated = $request->validate([
         'title' => 'required|max:255',
         'description' => 'required',
-        'status' => 'required',
+        'status' => 'required|in: "новая", "в процессе", "заваршена"',
     ]);
 
    

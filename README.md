@@ -32,6 +32,8 @@ DB_PASSWORD=your_database_password
 
 php artisan migrate
 
+php artisan migrate:fresh  --seed
+
 Создание кэш-файлов и файлов питания
 Чтобы очистить кэши и создать необходимые файлы:
 

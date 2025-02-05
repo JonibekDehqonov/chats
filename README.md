@@ -1,6 +1,6 @@
 1. Скачать проект
 Клонируйте проект на свой компьютер:
-git clone https://github.com/JonibekDehqonov/proIO.git
+git clone https://github.com/JonibekDehqonov/chats.git
 
 
 

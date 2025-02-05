@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
+    L5Swagger\L5SwaggerServiceProvider::class,
 
     /*
     |--------------------------------------------------------------------------

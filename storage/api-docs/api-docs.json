@@ -8,7 +8,7 @@
         "/api/register": {
             "post": {
                 "tags": [
-                    "Register"
+                    "Users"
                 ],
                 "operationId": "a718f172ff3ac464d723835815f8fb57",
                 "parameters": [
@@ -21,11 +21,19 @@
                         }
                     },
                     {
-                        "name": "email",
+                        "name": "avatar",
                         "in": "query",
                         "required": true,
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "login",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
                         }
                     },
                     {
@@ -70,14 +78,14 @@
         "/api/login": {
             "post": {
                 "tags": [
-                    "Login"
+                    "Users"
                 ],
                 "summary": "Get list of active tests",
                 "description": "Returns list of active tests",
                 "operationId": "getActiveTestList",
                 "parameters": [
                     {
-                        "name": "email",
+                        "name": "login",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -118,7 +126,7 @@
         "/api/logout": {
             "post": {
                 "tags": [
-                    "logout"
+                    "Users"
                 ],
                 "summary": "Logout the current user",
                 "operationId": "79854151e609bd20032aa5aa4d5a35c0",
@@ -151,10 +159,10 @@
                 ]
             }
         },
-        "/api/tasks": {
+        "/api/user": {
             "get": {
                 "tags": [
-                    "Tasks"
+                    "Users"
                 ],
                 "summary": "Get list of users",
                 "description": "Returns list of users",
@@ -185,169 +193,42 @@
                     }
                 ]
             },
-            "post": {
-                "tags": [
-                    "Tasks"
-                ],
-                "summary": "Create a new post",
-                "description": "This endpoint allows an authenticated user to create a new post.",
-                "operationId": "53feb2a5084021acb62923cf3cd7a873",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "title": {
-                                        "description": "Title of the post",
-                                        "type": "string",
-                                        "example": "My First Post"
-                                    },
-                                    "description": {
-                                        "description": "Content of the post",
-                                        "type": "string",
-                                        "example": "This is the content of my first post."
-                                    },
-                                    "status_id": {
-                                        "description": "Status_id",
-                                        "type": "integer",
-                                        "example": "1,2,3"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Post created successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "errors": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string",
-                                                "example": "The title field is required."
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/tasks/{id}": {
-            "get": {
-                "tags": [
-                    "Tasks"
-                ],
-                "summary": "Получение данных пользователя по ID",
-                "description": "Возвращает информацию о пользователе только для авторизованных пользователей.",
-                "operationId": "23615b21f3984fd9361306821c838ad0",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID пользователя",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "404": {
-                        "description": " не найден"
-                    },
-                    "401": {
-                        "description": "доступ"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
             "put": {
                 "tags": [
-                    "Tasks"
+                    "Users"
                 ],
                 "summary": "Update an existing post",
-                "operationId": "18e64b4b16cbee264fa84b775e6b7a91",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
+                "operationId": "0f49a14c8153e130bcdb1b067d6e9170",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "title": {
-                                        "description": "Title of the post",
+                                    "name": {
+                                        "description": "Name",
                                         "type": "string",
-                                        "example": "My First Post"
+                                        "example": "Burhon"
                                     },
-                                    "description": {
-                                        "description": "Content of the post",
+                                    "login": {
+                                        "description": "login",
                                         "type": "string",
-                                        "example": "This is the content of my first post."
+                                        "example": "000000"
                                     },
-                                    "status_id": {
-                                        "description": "Status_id",
+                                    "password": {
+                                        "description": "password",
                                         "type": "integer",
-                                        "example": "1,2,3"
+                                        "example": "12345678"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "password_confirmation",
+                                        "type": "integer",
+                                        "example": "12345678"
+                                    },
+                                    "avatar": {
+                                        "description": "avatar",
+                                        "type": "integer",
+                                        "example": "avatar.png"
                                     }
                                 },
                                 "type": "object"
@@ -383,33 +264,215 @@
                         "bearerAuth": []
                     }
                 ]
-            },
-            "delete": {
+            }
+        },
+        "/api/chats": {
+            "get": {
                 "tags": [
-                    "Tasks"
+                    "Chats"
                 ],
-                "summary": "Delete an existing post",
-                "operationId": "2c379aab1f7cf16dbf084cee9978de75",
+                "operationId": "1ad2bc436ab5a502ecfea4ebd92d5318",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Chats"
+                ],
+                "summary": "Create a new chat",
+                "description": "Creates a new chat with the specified type and the authenticated user as the creator.",
+                "operationId": "storeChat",
+                "requestBody": {
+                    "description": "Data needed to create a new chat",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "type"
+                                ],
+                                "properties": {
+                                    "type": {
+                                        "description": "Type of the chat",
+                                        "type": "string",
+                                        "example": "private"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Chat created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "example": "private"
+                                        },
+                                        "created_by": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "type": [
+                                                    "The type field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/chats/{id}": {
+            "get": {
+                "tags": [
+                    "Chats"
+                ],
+                "summary": "Berilgan ID bo‘yicha chatni olish",
+                "operationId": "778a3551da02faaea5d5d37527a961de",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "Chat ID",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "example": 1
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Post deleted successfully",
+                        "description": "Muvaffaqiyatli so‘rov",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "example": "private"
+                                        },
+                                        "created_by": {
+                                            "type": "integer",
+                                            "example": 5
+                                        },
+                                        "messages": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 10
+                                                    },
+                                                    "chat_id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "user_id": {
+                                                        "type": "integer",
+                                                        "example": 5
+                                                    },
+                                                    "message": {
+                                                        "type": "string",
+                                                        "example": "Salom!"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-02-04T12:00:00Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"
@@ -418,7 +481,146 @@
                         }
                     },
                     "404": {
-                        "description": "Post not found"
+                        "description": "Chat topilmadi"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/chats/{id}/messages": {
+            "get": {
+                "tags": [
+                    "Messages"
+                ],
+                "operationId": "bac3c649a526a3fa1b8532ded360910c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Chat ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Messages"
+                ],
+                "summary": "Отправить сообщение в чат",
+                "description": "Создает новое сообщение в указанном чате.",
+                "operationId": "storeMessage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID чата, в который отправляется сообщение",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "message"
+                                ],
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Привет!"
+                                    },
+                                    "file_url": {
+                                        "type": "string",
+                                        "example": "https://example.com/file.png",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Сообщение успешно создано",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "chat_id": {
+                                            "type": "integer",
+                                            "example": 123
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": 45
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Привет!"
+                                        },
+                                        "file_url": {
+                                            "type": "string",
+                                            "example": "https://example.com/file.png",
+                                            "nullable": true
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-02-05T12:00:00Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка валидации входных данных"
+                    },
+                    "401": {
+                        "description": "Неавторизованный доступ"
                     }
                 },
                 "security": [
@@ -441,20 +643,16 @@
     },
     "tags": [
         {
-            "name": "Register",
-            "description": "Register"
+            "name": "Users",
+            "description": "Users"
         },
         {
-            "name": "Login",
-            "description": "Login"
+            "name": "Chats",
+            "description": "Chats"
         },
         {
-            "name": "logout",
-            "description": "logout"
-        },
-        {
-            "name": "Tasks",
-            "description": "Tasks"
+            "name": "Messages",
+            "description": "Messages"
         }
     ]
 }

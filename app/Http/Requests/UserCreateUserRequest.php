@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTasktRequest extends FormRequest
+class UserCreateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,10 @@ class StoreTasktRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'title'=>'required|max:255',
-                'description'=>'required',
-                'status_id' => 'required|in: 1,2,3'   
+            'name' => 'required',
+            'login' => 'required|min:6|unique:users',
+            'password' => 'required|min:8|confirmed',
+            'avatar'=>  'required'
         ];
     }
 }

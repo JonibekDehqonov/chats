@@ -15,13 +15,9 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name'=>'Admin',
-            'email'=>'Admin@gmail.com',
-            'password'=>'1234',
-        ]);
-        User::create([
-            'name'=>'Ali',
-            'email'=>'Ali@gmail.com',
-            'password'=>'1234',
+            'login'=>'123456',
+            'avatar'=>'https://marketplace.canva.com/EAFmXS7R66Y/1/0/1600w/canva-avatar-foto-de-perfil-hombre-gafas-dibujo-ilustrado-moderno-verde-I9qMvdruJU8.jpg',
+            'password'=>'12345678',
         ]);
     }
 }
